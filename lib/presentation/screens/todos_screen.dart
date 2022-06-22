@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/presentation/widgets/search_bar.dart';
 
 import '../../logic/todo/todo_cubit.dart';
 
@@ -17,12 +18,21 @@ class TodosScreen extends StatelessWidget {
     );
   }
 
+  void openSearchBar(BuildContext context) {
+    showSearch(context: context, delegate: SearchBar());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo App'),
+        centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () => openSearchBar(context),
+            icon: const Icon(Icons.search),
+          ),
           IconButton(
             onPressed: () => openManageTodo(context),
             icon: const Icon(Icons.add),

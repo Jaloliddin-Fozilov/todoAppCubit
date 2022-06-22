@@ -79,4 +79,12 @@ class TodoCubit extends Cubit<TodoState> {
     emit(TodoDeleted());
     emit(TodoState(todos: todos));
   }
+
+  List<Todo> searchTodos(String title) {
+    return state.todos!
+        .where(
+          (todo) => todo.title.toLowerCase().contains(title.toLowerCase()),
+        )
+        .toList();
+  }
 }
