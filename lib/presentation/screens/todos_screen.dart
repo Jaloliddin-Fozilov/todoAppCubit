@@ -32,8 +32,9 @@ class TodosScreen extends StatelessWidget {
       body: BlocBuilder<TodoCubit, TodoState>(
         builder: (context, state) {
           return ListView.builder(
-            itemCount: state.todos.length,
-            itemBuilder: (ctx, index) => TodoListItem(todo: state.todos[index]),
+            itemCount: state.todos!.length,
+            itemBuilder: (ctx, index) =>
+                TodoListItem(todo: state.todos![index]),
           );
         },
       ),

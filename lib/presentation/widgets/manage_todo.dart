@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/logic/todo/todo_cubit.dart';
+
+import '../../data/models/todo.dart';
+import '../../logic/todo/todo_cubit.dart';
 
 class ManageTodo extends StatelessWidget {
+  final Todo? todo;
   ManageTodo({
+    this.todo,
     Key? key,
   }) : super(key: key);
 
@@ -13,7 +17,11 @@ class ManageTodo extends StatelessWidget {
   void _submit(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      BlocProvider.of<TodoCubit>(context).addTodo(_title);
+      if (todo == null) {
+        context.read<TodoCubit>().addTodo(_title);
+      } else {
+        context.read<TodoCubit>().editTodo(todo!.id, _title);
+      }
     }
   }
 
@@ -21,7 +29,7 @@ class ManageTodo extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TodoCubit, TodoState>(
       listener: (context, state) {
-        if (state is TodoAdded) {
+        if (state is TodoAdded || state is TodoEdited) {
           Navigator.of(context).pop();
         } else if (state is TodoError) {
           showDialog(
@@ -52,6 +60,7 @@ class ManageTodo extends StatelessWidget {
                     }
                     return null;
                   },
+                  initialValue: todo == null ? '' : todo!.title,
                   onSaved: (value) {
                     _title = value!;
                   },
@@ -65,7 +74,7 @@ class ManageTodo extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () => _submit(context),
-                      child: const Text('ADD'),
+                      child: Text(todo == null ? 'ADD' : 'EDIT'),
                     ),
                   ],
                 )
