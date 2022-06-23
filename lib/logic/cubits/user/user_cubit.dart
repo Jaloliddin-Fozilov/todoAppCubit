@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../data/models/user.dart';
+
+import '../../../data/models/user.dart';
 
 part 'user_state.dart';
 

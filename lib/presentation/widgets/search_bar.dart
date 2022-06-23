@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/todo/todo_cubit.dart';
+import '../../logic/cubits/todo/todo_cubit.dart';
 import 'todo_list_item.dart';
 
 class SearchBar extends SearchDelegate {

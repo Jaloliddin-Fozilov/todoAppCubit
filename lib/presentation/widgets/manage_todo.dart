@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/todo.dart';
-import '../../logic/todo/todo_cubit.dart';
+import '../../logic/cubits/todo/todo_cubit.dart';
 
 class ManageTodo extends StatelessWidget {
   final Todo? todo;

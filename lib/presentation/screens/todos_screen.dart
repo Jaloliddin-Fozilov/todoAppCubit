@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoapp/logic/active_todos/active_todos_cubit.dart';
 
 import '../../data/constants/tab_titles_constants.dart';
-import '../../logic/completed_todos/copleted_todos_cubit.dart';
-import '../../logic/todo/todo_cubit.dart';
+import '../../logic/cubits/active_todos/active_todos_cubit.dart';
+import '../../logic/cubits/completed_todos/copleted_todos_cubit.dart';
+import '../../logic/cubits/todo/todo_cubit.dart';
 import '../widgets/manage_todo.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/todo_list_item.dart';

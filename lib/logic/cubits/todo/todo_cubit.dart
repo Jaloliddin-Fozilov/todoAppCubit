@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/models/todo.dart';
+import '../../../data/models/todo.dart';
 import '../user/user_cubit.dart';
 
 part 'todo_state.dart';

@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:todoapp/data/models/todo.dart';
-import 'package:todoapp/logic/todo/todo_cubit.dart';
+import '../../../data/models/todo.dart';
+
+import '../todo/todo_cubit.dart';
 
 part 'active_todos_state.dart';
 
