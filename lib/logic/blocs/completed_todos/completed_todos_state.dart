@@ -1,4 +1,4 @@
-part of 'copleted_todos_cubit.dart';
+part of 'completed_todos_bloc.dart';
 
 @immutable
 abstract class CompletedTodosState {}

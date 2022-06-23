@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubits/todo/todo_cubit.dart';
+import '../../logic/blocs/todo/todo_bloc.dart';
 import 'todo_list_item.dart';
 
 class SearchBar extends SearchDelegate {
@@ -27,7 +27,7 @@ class SearchBar extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    final todos = context.watch<TodoCubit>().searchTodos(query);
+    final todos = context.watch<TodoBloc>().searchTodos(query);
     return todos.isEmpty
         ? const Center(
             child: Text('Can\'t find todos'),
@@ -43,7 +43,7 @@ class SearchBar extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.isNotEmpty) {
-      final todos = context.watch<TodoCubit>().searchTodos(query);
+      final todos = context.watch<TodoBloc>().searchTodos(query);
       return todos.isEmpty
           ? const Center(
               child: Text('Can\'t find todos'),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/todo.dart';
-import '../../logic/cubits/todo/todo_cubit.dart';
+import '../../logic/blocs/todo/todo_bloc.dart';
 
 class ManageTodo extends StatelessWidget {
   final Todo? todo;
@@ -18,16 +18,16 @@ class ManageTodo extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       if (todo == null) {
-        context.read<TodoCubit>().addTodo(_title);
+        context.read<TodoBloc>().add(AddNewTodoEvent(_title));
       } else {
-        context.read<TodoCubit>().editTodo(todo!.id, _title);
+        context.read<TodoBloc>().add(EditTodoEvent(todo!.id, _title));
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<TodoCubit, TodoState>(
+    return BlocListener<TodoBloc, TodoState>(
       listener: (context, state) {
         if (state is TodoAdded || state is TodoEdited) {
           Navigator.of(context).pop();

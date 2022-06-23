@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoapp/logic/blocs/active_todos/active_todos_bloc.dart';
+import 'package:todoapp/logic/blocs/completed_todos/completed_todos_bloc.dart';
 
 import '../../data/constants/tab_titles_constants.dart';
-import '../../logic/cubits/active_todos/active_todos_cubit.dart';
-import '../../logic/cubits/completed_todos/copleted_todos_cubit.dart';
-import '../../logic/cubits/todo/todo_cubit.dart';
+import '../../logic/blocs/todo/todo_bloc.dart';
 import '../widgets/manage_todo.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/todo_list_item.dart';
@@ -33,9 +33,9 @@ class _TodosScreenState extends State<TodosScreen> {
   @override
   void didChangeDependencies() {
     if (!_init) {
-      context.read<TodoCubit>().getTodos();
-      context.read<ActiveTodosCubit>().getActiveTodos();
-      context.read<CompletedTodosCubit>().getCopletedTodos();
+      context.read<TodoBloc>().add(LoadTodosEvent());
+      context.read<ActiveTodosBloc>().add(LoadActiveTodosEvenet());
+      context.read<CompletedTodosBloc>().add(LoadCompletedTodosEvenet());
     }
     _init = true;
     super.didChangeDependencies();
@@ -68,7 +68,7 @@ class _TodosScreenState extends State<TodosScreen> {
         ),
         body: TabBarView(
           children: [
-            BlocBuilder<TodoCubit, TodoState>(
+            BlocBuilder<TodoBloc, TodoState>(
               builder: (context, state) {
                 if (state is TodosLoaded) {
                   return state.todos.isEmpty
@@ -86,7 +86,7 @@ class _TodosScreenState extends State<TodosScreen> {
                 );
               },
             ),
-            BlocBuilder<ActiveTodosCubit, ActiveTodosState>(
+            BlocBuilder<ActiveTodosBloc, ActiveTodosState>(
               builder: (context, state) {
                 if (state is ActiveTodosLoaded) {
                   return state.todos.isEmpty
@@ -104,7 +104,7 @@ class _TodosScreenState extends State<TodosScreen> {
                 );
               },
             ),
-            BlocBuilder<CompletedTodosCubit, CompletedTodosState>(
+            BlocBuilder<CompletedTodosBloc, CompletedTodosState>(
               builder: (context, state) {
                 if (state is CompletedTodosLoaded) {
                   return state.todos.isEmpty

@@ -1,4 +1,4 @@
-part of 'active_todos_cubit.dart';
+part of 'active_todos_bloc.dart';
 
 @immutable
 abstract class ActiveTodosState {}
