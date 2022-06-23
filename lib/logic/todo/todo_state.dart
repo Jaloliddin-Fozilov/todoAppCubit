@@ -10,10 +10,16 @@ class TodoState {
 class TodoInitial extends TodoState {
   final List<Todo> todos;
 
-  const TodoInitial(this.todos) : super();
+  const TodoInitial(this.todos);
 }
 
 class TodoAdded extends TodoState {}
+
+class TodosLoaded extends TodoState {
+  final List<Todo> todos;
+
+  const TodosLoaded(this.todos) : super(todos: todos);
+}
 
 class TodoEdited extends TodoState {}
 
